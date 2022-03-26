@@ -15,9 +15,9 @@ const routes = [
         path: '/patview',
         name: 'PatientView',
         component: () => import("../views/PatView.vue"),
-        meta: {
-            requiresAuth:true,
-        },
+        // meta: {
+        //     requiresAuth:true,
+        // },
     },
     {
         path: '/docview',
@@ -36,8 +36,5 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.requiresAuth))
-})
 
 export default router
