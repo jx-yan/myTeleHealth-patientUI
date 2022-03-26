@@ -7,22 +7,12 @@ const routes = [
         component: () => import("../views/PatLogin.vue"),
     },
     {
-        path: '/doclogin',
-        name: 'DoctorLogin',
-        component: () => import("../views/DocLogin.vue"),
-    },
-    {
         path: '/patview',
         name: 'PatientView',
         component: () => import("../views/PatView.vue"),
         // meta: {
         //     requiresAuth:true,
         // },
-    },
-    {
-        path: '/docview',
-        name: 'DocView',
-        component: () => import("../views/DocView.vue"),
     },
     {
         path: '/book',

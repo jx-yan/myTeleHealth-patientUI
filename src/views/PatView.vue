@@ -3,18 +3,24 @@
 	import PatientApptTab from "../components/PatApptTab.vue";
 	import Footer from "../components/Footer.vue";
 
-    import { getAuth } from "firebase/auth";
-    import axios from 'axios';
+	import { getAuth } from "firebase/auth";
+	import axios from "axios";
 
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const userid = user.uid;
+	const auth = getAuth();
+	const user = auth.currentUser;
+	const patid = user.uid;
+	const patname = user.displayName;
 
 	// call API to retrieve all appointments by patient_id
-    const fetchApptbyPatID = () => {
-        axios.get("http://127.0.0.1:5004/")
-    }
-    
+	const fetchApptbyPatID = () => {
+		axios
+            .get(`http://localhost:5004/appointment/patient/${patid}`)
+            .then(response => (
+                console.log(response.data)
+            ))
+	};
+
+    fetchApptbyPatID();
 </script>
 
 <template>
@@ -22,7 +28,7 @@
 	<h1
 		class="text-xl sm:text-4xl text-center font-extrabold tracking-tight p-12"
 	>
-		Welcome, {{userid}}
+		Welcome, {{ patname }}
 	</h1>
 	<div class="container max-w-3xl mb-12 mx-auto" id="#appt">
 		<h3 class="text-xl sm:text-2xl font-extrabold tracking-tight p-4 mt-5">
@@ -30,6 +36,7 @@
 		</h3>
 		<div class="w-full bg-white shadow-md rounded px-8 pt-6 pb-6 space-y-4">
 			<PatientApptTab />
+            {{fetchApptbyPatID}}
 		</div>
 	</div>
 	<Footer />
