@@ -1,6 +1,7 @@
 <script setup>
 	import { reactive } from "vue";
 	import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+	import router from "../router";
 
 	const auth = getAuth();
 
@@ -17,6 +18,7 @@
 			.then((userCredential) => {
 				// Signed in
 				const user = userCredential.user;
+				router.push({name: 'PatientView'});
 			})
 			.catch((error) => {
 				const errorCode = error.code;
