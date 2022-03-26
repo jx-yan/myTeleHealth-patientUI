@@ -4,12 +4,16 @@
 	import Footer from "../components/Footer.vue";
 
     import { getAuth } from "firebase/auth";
-    
+    import axios from 'axios';
+
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
 
 	// call API to retrieve all appointments by patient_id
+    const fetchApptbyPatID = () => {
+        axios.get("http://127.0.0.1:5004/")
+    }
     
 </script>
 
