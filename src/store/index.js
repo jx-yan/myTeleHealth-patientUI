@@ -6,7 +6,6 @@ import {
 	onAuthStateChanged,
 	signOut,
 } from "firebase/auth";
-import axios from "axios";
 
 const store = createStore({
 	state: {

@@ -8,15 +8,16 @@
 	import { ref, computed } from "vue";
 	import axios from "axios";
 
+	const store = useStore();
 	const authIsReady = computed(() => store.state.authIsReady);
 	
-	const store = useStore();
 	const patName = computed(() => store.state.user.displayName);
 
 	let appts = ref(null);
 	let medRecords = ref(null);
 
 	const id = computed(() => store.state.id)
+	
 
 	axios
 		.get("http://localhost:5004/appointment/patient/" + id.value)
@@ -33,7 +34,7 @@
 	
 </script>
 
-<template v-if="authIsReady">
+<template>
 	<NavbarVue />
 
 	<h1
@@ -46,6 +47,7 @@
 			Appointments
 		</h3>
 		<div class="w-full bg-white shadow-md rounded px-8 pt-6 pb-6 space-y-4">
+			<p class="font-extrabold tracking-tight text-center" v-if="appts == null">No Appointments</p>
 			<PatApptTabVue v-for="appt in appts" :appt="appt" />
 		</div>
 	</div>
@@ -54,6 +56,7 @@
 			Medical Records
 		</h3>
 		<div class="w-full bg-white shadow-md rounded px-8 pt-6 pb-6 space-y-4">
+			<p class="font-extrabold tracking-tight text-center" v-if="medRecords == null">No Medical Records</p>
 			<PatMrTab v-for="mr in medRecords" :mr="mr" />
 		</div>
 	</div>

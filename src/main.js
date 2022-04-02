@@ -4,5 +4,11 @@ import router from "./router";
 import "./index.css";
 import store from "./store/index";
 
-createApp(App).use(router).use(store).mount('#app');
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
+const app = createApp(App);
+
+app.component('Datepicker', Datepicker);
+
+app.use(router).use(store).mount('#app');

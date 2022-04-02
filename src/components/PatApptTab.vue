@@ -11,7 +11,7 @@
 		</p>
 		<p class="font-extrabold tracking-tight p-4 flex grow">
 			<span class=""> Doctor : </span>
-			<span class="text-red-500 pl-3"> {{appt.doc_name}}</span>
+			<span class="text-indigo-700 pl-3"> {{appt.doc_name}}</span>
 
 			<span class="text-gray-500 ml-auto pt-6">
 				<a :href="appt.zoom_link" target="_blank" class="underline text-blue-500 pr-10">Zoom Link</a>
