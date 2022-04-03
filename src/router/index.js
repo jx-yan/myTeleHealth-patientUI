@@ -10,9 +10,6 @@ const routes = [
 		path: "/patview",
 		name: "PatientView",
 		component: () => import("../views/PatView.vue"),
-		meta: {
-			requiresAuth: true,
-		},
 	},
 	{
 		path: "/book",
@@ -22,7 +19,8 @@ const routes = [
 	{
 		path: "/payment",
 		name: "PayFee",
-		component: () => import("../views/BookAppt.vue"),
+		component: () => import("../views/Payment.vue"),
+		props: true
 	}
 ];
 

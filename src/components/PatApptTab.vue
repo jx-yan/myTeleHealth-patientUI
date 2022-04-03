@@ -14,7 +14,7 @@
 			<span class="text-indigo-700 pl-3"> {{appt.doc_name}}</span>
 
 			<span class="text-gray-500 ml-auto pt-6">
-				<a :href="appt.zoom_link" target="_blank" class="underline text-blue-500 pr-10">Zoom Link</a>
+				<a :href="appt.join_url" target="_blank" class="underline text-blue-500 pr-10">Zoom Link</a>
 				{{appt.status}}
 			</span>
 		</p>

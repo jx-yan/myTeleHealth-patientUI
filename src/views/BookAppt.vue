@@ -4,7 +4,7 @@
 
 	import Datepicker from "@vuepic/vue-datepicker";
 	import "@vuepic/vue-datepicker/dist/main.css";
-	
+
 	import axios from "axios";
 	import { useStore } from "vuex";
 	import { ref, computed } from "vue";
@@ -12,10 +12,9 @@
 
 	const store = useStore();
 
-
 	let doc = ref({});
 	axios.get("http://localhost:5001/doctor").then((res) => {
-		for (const [key, value] of Object.entries(res.data)) {
+		for (const [key, value] of Object.entries(res.data.data)) {
 			doc.value[key] = value.Name;
 		}
 	});
@@ -25,7 +24,7 @@
 		"-" +
 		("0" + (today.getMonth() + 1)).slice(-2) +
 		"-" +
-		(today.getDate()+1);
+		(today.getDate() + 1);
 	let maxDate =
 		today.getFullYear() +
 		"-" +
@@ -34,26 +33,36 @@
 		today.getDate();
 	let startTime = ref({ hours: 11, minutes: 0 });
 
-
 	let dateTime = ref(null);
 	let selected = ref(null);
+
 	const bookAppt = async () => {
 		// prepare data for POST API
-		let doc_id = selected.value.split("_")[0]
-		let doc_name = selected.value.split("_")[1]
-		let patName = computed(() => store.state.user.displayName)
-		let patId = computed(() => store.state.id)
+		let doc_id = selected.value.split("_")[0];
+		let doc_name = selected.value.split("_")[1];
+		let patName = computed(() => store.state.user.displayName);
+		let patId = computed(() => store.state.id);
+		let datetime = dateTime.value.toString();
 
 		let json_obj = {
-			"datetime": dateTime.value,
+			"datetime": datetime,
 			"doc_id": doc_id,
 			"doc_name": doc_name,
 			"patient_id": patId.value,
 			"patient_name": patName.value,
-		}
+		};
 
-		console.log(json_obj)
+		console.log(json_obj);
 
+		axios
+			.post("http://localhost:5100/book_appointment", json_obj)
+			.then((res) => {
+				if (res.status == 200) {
+					let appt_id = res.data.data.appt_id
+					let patEmail = computed(() => store.state.user.email);
+					console.log(appt_id, patEmail.value)
+				}
+			});
 	};
 </script>
 
@@ -77,7 +86,12 @@
 				v-model="selected"
 				required
 			>
-				<option v-for="(name, index) in doc" v-html="name" :id="index" :value="index + '_' + name"></option>
+				<option
+					v-for="(name, index) in doc"
+					v-html="name"
+					:id="index"
+					:value="index + '_' + name"
+				></option>
 			</select>
 			<label class="pt-3 mb-2 block text-sm font-medium text-dark"
 				>Choose a Date for Your Appointment
