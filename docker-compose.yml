@@ -1,0 +1,149 @@
+version: "4.6.1"
+
+volumes:
+  rabbitmq_data:
+
+services:
+ 
+  #################################
+  # Book: The appointment microservice
+  #################################
+  appointment:
+    image: xavierngzh/appointment
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5004:5004"
+ 
+  ###############################################
+  # zoom: Zoom-api microservice
+  ###############################################
+  zoom-api:
+    image: jxyan/zoomapi
+    restart: always
+    ports: 
+      - "5006:5006"
+
+  ###############################################
+  # Book Appointment: Book Appointment Complex microservice
+  ###############################################
+  book_appointment:
+    image: xavierngzh/book_appointment
+    depends_on:
+      - appointment
+      - zoom-api
+
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports: 
+      - "5100:5100"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: esd-rabbit
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes: 
+      - rabbitmq_data:/var/lib/rabbitmq
+  
+  # Patient: The Patient microservice
+  ###################################
+  patient:
+    image: weihern/patient
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5002:5002"
+
+  # Medical Records microservice
+  ###################################
+  medicalrecords:
+    image: zuhayley/medicalrecords
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5003:5003"
+
+  ###################################
+  # Error: The Error microservice
+  ###################################
+  mail:
+    image: weihern/mail
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      PYTHONUNBUFFERED: 1
+
+  ######################################
+  # create_record microservice
+  ######################################
+  create_record:
+    image: zuhayley/create_record
+    restart: always
+    depends_on:
+      - rabbitmq
+      - mail
+      - appointment
+      - patient
+      - medicalrecords
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5101:5101"
+
+  # # Doctor: The doctor microservice
+  # ###################################
+  doctor:
+    image: weihern/doctor
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5001:5001"
+
+  # # MakePayment: The complex for making payment
+  # ###################################
+  makepayment:
+    image: weihern/makepayment
+    restart: always
+    depends_on:
+      - rabbitmq
+      - mail
+      - payment
+      - appointment
+      - stripe
+      - doctor
+    environment:
+      PYTHONUNBUFFERED: 1
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+    ports:
+      - "5200:5200"
+
+  # # payment: payment microservice
+  # ###################################
+  payment:
+    image: weihern/payment
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5007:5007"
+
+  # # STRIPE
+  # #################################
+  stripe:
+    image: stripe/stripe-cli:v1.8.1
+    restart: always
+    command: listen --api-key sk_test_51KemhSLx8UdBv77DmmODzbwNYO05yOVkSFxW16AAYEWrTkMOX4d12pITTM1ZQGeQNYGtUtSsu0XjiHo0i01oeNPY00y85zTTPs --forward-to makepayment:5200/stripe_webhooks
