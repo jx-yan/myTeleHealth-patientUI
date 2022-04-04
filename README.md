@@ -54,7 +54,7 @@ npm run dev
 - Used to facilitate user account creation and login via email/password provider and the creation of a unique user-id
 
 ## Data Storage
-### Realtime Database
+### Firebase Realtime Database
 - A cloud-hosted NoSQL database
 - Stores data in documents
 - Organises them into collections
