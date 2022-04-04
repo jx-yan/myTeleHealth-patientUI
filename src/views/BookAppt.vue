@@ -45,22 +45,28 @@
 		let datetime = dateTime.value.toString();
 
 		let json_obj = {
-			"datetime": datetime,
-			"doc_id": doc_id,
-			"doc_name": doc_name,
-			"patient_id": patId.value,
-			"patient_name": patName.value,
+			datetime: datetime,
+			doc_id: doc_id,
+			doc_name: doc_name,
+			patient_id: patId.value,
+			patient_name: patName.value,
 		};
-
-		console.log(json_obj);
 
 		axios
 			.post("http://localhost:5100/book_appointment", json_obj)
 			.then((res) => {
-				if (res.status == 200) {
-					let appt_id = res.data.data.appt_id
+				if (res.status == 201) {
+					let appt_id = res.data.data.appt_id;
 					let patEmail = computed(() => store.state.user.email);
-					console.log(appt_id, patEmail.value)
+					window.alert(res.data.message);
+					router.push({
+						name: "PayFee",
+						path: "/payment",
+						params: {
+							appt_id: appt_id,
+							patient_email: patEmail.value,
+						},
+					});
 				}
 			});
 	};
@@ -69,10 +75,15 @@
 <template>
 	<Navbar />
 	<h1
-		class="text-xl sm:text-4xl text-center font-extrabold tracking-tight p-12"
+		class="text-xl sm:text-4xl text-center font-extrabold tracking-tight p-10"
 	>
 		Book Appointment
 	</h1>
+	<p
+		class="block text-sm font-medium text-center pb-10"
+	>
+		Consultation Fee is at flat rate: <span class="font-extrabold tracking-tight">SGD $20.00</span>
+	</p>
 	<form @submit.prevent="bookAppt">
 		<div
 			class="container max-w-2xl mx-auto w-full bg-white shadow-md rounded px-8 pt-6 pb-6 space-y-4 mb-10"
@@ -88,7 +99,7 @@
 			>
 				<option
 					v-for="(name, index) in doc"
-					v-html="name"
+					v-html="'Dr. ' + name"
 					:id="index"
 					:value="index + '_' + name"
 				></option>
@@ -109,14 +120,15 @@
 				></Datepicker
 			></label>
 		</div>
-		<div class="flex mb-10 place-content-center">
+		<div class="flex place-content-center mb-10">
 			<button
 				type="submit"
 				class="text-dark hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
 			>
-				Book Appointment
+				Confirm Booking and Payment
 			</button>
 		</div>
 	</form>
+
 	<Footer />
 </template>

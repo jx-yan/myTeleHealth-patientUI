@@ -22,13 +22,13 @@
 	axios
 		.get("http://localhost:5004/appointment/patient/" + id.value)
 		.then((response) => {
-			appts.value = response.data.data.appointments;
+			appts.value = response.data.data.appointments.reverse();
 		});
 
 	axios
 		.get("http://localhost:5003/record/patient_id=" + id.value)
 		.then((response) => {
-			medRecords.value = response.data.data;
+			medRecords.value = response.data.data.reverse();
 		});
 	
 	

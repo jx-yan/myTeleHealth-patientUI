@@ -7,6 +7,12 @@ import {
 	signOut,
 } from "firebase/auth";
 
+import VuexPersistence from "vuex-persist";
+
+const vuexLocal = new VuexPersistence({
+	storage: window.localStorage,
+});
+
 const store = createStore({
 	state: {
 		user: null,
@@ -41,6 +47,7 @@ const store = createStore({
 			context.commit("setUserID", null);
 		}
 	},
+	plugins: [vuexLocal.plugin],
 });
 
 const unsub = onAuthStateChanged(auth, (user) => {
