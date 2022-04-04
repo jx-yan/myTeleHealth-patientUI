@@ -56,8 +56,7 @@ npm run dev
 ## Data Storage
 ### Firebase Realtime Database
 - A cloud-hosted NoSQL database
-- Stores data in documents
-- Organises them into collections
+- Data is stored as JSON and synchronized in realtime to every connected client
 
 ## Beyond-The-Lab
 - Handled Business Logic - Deconflict of appointment schedule
