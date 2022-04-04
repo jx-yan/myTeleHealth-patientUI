@@ -18,8 +18,8 @@ npm run dev
 # Frontend Frameworks and Libraries
 - [Vite](https://vitejs.dev/guide)
 - [Vue 3](https://staging.vuejs.org/guide/introduction.html)
-- [Tailwind CSS v3](https://tailwindcss.com/docs/configuration)
-- [Vue Router v4](https://github.com/vuejs/vue-router-next)
+- [Tailwind CSS](https://tailwindcss.com/docs/configuration)
+- [Vue Router](https://github.com/vuejs/vue-router-next)
 - [Vuex](https://vuex.vuejs.org)
  
 # Backend Frameworks and Libraries
