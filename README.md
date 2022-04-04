@@ -2,7 +2,7 @@
 
 <p align="center">myTeleHealth Patient is the user interface for Doctors to access myTelehealth services</p>
  
-## Getting Started
+# Getting Started
  
 - Install [NodeJS](https://nodejs.org/en/) and [Docker](https://www.docker.com) before installing project
 
