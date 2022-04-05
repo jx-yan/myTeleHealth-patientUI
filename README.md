@@ -21,6 +21,7 @@ npm run dev
 - [Tailwind CSS](https://tailwindcss.com/docs/configuration)
 - [Vue Router](https://github.com/vuejs/vue-router-next)
 - [Vuex](https://vuex.vuejs.org)
+- [Axios](https://axios-http.com/)
  
 ## Backend Frameworks and Libraries
 - [Flask](https://flask.palletsprojects.com/en/2.1.x)
