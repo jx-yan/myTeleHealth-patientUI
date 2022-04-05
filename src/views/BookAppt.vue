@@ -80,7 +80,17 @@
 		Book Appointment
 	</h1>
 	<p
-		class="block text-sm font-medium text-center pb-10"
+		class="block text-sm font-medium text-center pb-2"
+	>
+		You can only book appointment between <span class="font-extrabold tracking-tight">11:00 to 17:00</span>
+	</p>
+	<p
+		class="block text-sm font-medium text-center pb-2"
+	>
+		Each consultation will last for <span class="font-extrabold tracking-tight">30 mins</span>
+	</p>
+	<p
+		class="block text-sm font-medium text-center pb-5"
 	>
 		Consultation Fee is at flat rate: <span class="font-extrabold tracking-tight">SGD $20.00</span>
 	</p>
