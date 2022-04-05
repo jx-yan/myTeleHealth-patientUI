@@ -15,6 +15,7 @@ const routes = [
 		path: "/book",
 		name: "BookAppt",
 		component: () => import("../views/BookAppt.vue"),
+		props: true
 	},
 	{
 		path: "/payment",
@@ -26,6 +27,11 @@ const routes = [
 		path: "/paymentsuccess",
 		name: "PaymentSuccess",
 		component: () => import("../views/PaymentSuccess.vue"),
+	},
+	{
+		path: "/paymentfail",
+		name: "PaymentFail",
+		component: () => import("../views/PaymentFail.vue"),
 	}
 ];
 

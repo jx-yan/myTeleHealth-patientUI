@@ -10,9 +10,6 @@
 
 <template>
 	<h3 class="text-md sm:text-xl text-center font-extrabold tracking-tight p-12">
-		Payment Successful
-	</h3>
-    <h3 class="text-sm sm:text-lg text-center font-extrabold tracking-tight">
-		Thank you for using myTeleHealth!
+		Payment Failed. Please try again on Homepage...
 	</h3>
 </template>

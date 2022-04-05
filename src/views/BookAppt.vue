@@ -57,14 +57,14 @@
 			.then((res) => {
 				if (res.status == 201) {
 					let appt_id = res.data.data.appt_id;
-					let patEmail = computed(() => store.state.user.email);
+					let patient_email = computed(() => store.state.user.email);
 					window.alert(res.data.message);
 					router.push({
 						name: "PayFee",
 						path: "/payment",
 						params: {
 							appt_id: appt_id,
-							patient_email: patEmail.value,
+							patient_email: patient_email.value,
 						},
 					});
 				}

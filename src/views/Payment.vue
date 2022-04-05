@@ -1,13 +1,15 @@
 <script setup>
 	import axios from "axios";
-	const props = defineProps(["appt_id", "patEmail"]);
+	const props = defineProps(["appt_id", "patient_email"]);
 
 	let input_json = {
 		data: {
-			appt_id: props.appt_id,
-			patEmail: props.patEmail,
+			"appt_id": props.appt_id,
+			"patient_email": props.patient_email,
 		},
 	};
+
+	console.log(input_json)
 
 	axios.post("http://localhost:5200/make_payment", input_json).then((res) => {
 		let url = res.data.paying_link;
