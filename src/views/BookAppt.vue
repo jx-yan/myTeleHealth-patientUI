@@ -55,7 +55,7 @@
 		axios
 			.post("http://localhost:5100/book_appointment", json_obj)
 			.then((res) => {
-				if (res.status == 201) {
+				if (res.data.code == 201) {
 					let appt_id = res.data.data.appt_id;
 					let patient_email = computed(() => store.state.user.email);
 					window.alert(res.data.message);
@@ -67,6 +67,8 @@
 							patient_email: patient_email.value,
 						},
 					});
+				} else if (res.data.code == "400") {
+					window.alert(res.data.message +". \nPlease select another timing.")
 				}
 			});
 	};
