@@ -53,7 +53,7 @@
 	</div>
 	<div class="container max-w-3xl mb-12 mx-auto" id="#appt">
 		<h3 class="text-xl sm:text-2xl font-extrabold tracking-tight p-4 mt-5">
-			Medical Records
+			Past Medical Records
 		</h3>
 		<div class="w-full bg-white shadow-md rounded px-8 pt-6 pb-6 space-y-4">
 			<p class="font-extrabold tracking-tight text-center" v-if="medRecords == null">No Medical Records</p>
