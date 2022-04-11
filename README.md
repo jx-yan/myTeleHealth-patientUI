@@ -60,7 +60,7 @@ npm run dev
 - Data is stored as JSON and synchronized in realtime to every connected client
 
 ## Beyond-The-Lab
-- Handled Business Logic - Deconflict of appointment schedule
+- Handled Business Logic - Deconflict of appointment schedule, Payment Error Handling
 - Using NodeJS and ExpressJS for Zoom Microservice
 
 ## Authors and Acknowledgment
