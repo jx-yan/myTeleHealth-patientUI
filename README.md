@@ -1,6 +1,6 @@
 <h1 align="center">myTeleHealth - Patient</h1>
 
-<p align="center">myTeleHealth Patient is the user interface for Doctors to access myTelehealth services</p>
+<p align="center">myTeleHealth Patient is the user interface for Patients to access myTelehealth services</p>
  
 # Getting Started
  
